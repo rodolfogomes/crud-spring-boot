@@ -1,5 +1,7 @@
 package br.com.estudo.curdhibernate.services;
 
+import br.com.estudo.curdhibernate.DTO.UserDTO;
+import br.com.estudo.curdhibernate.builder.UserBuilder;
 import br.com.estudo.curdhibernate.model.User;
 import br.com.estudo.curdhibernate.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import java.util.List;
 public class UserService {
 
     private UserRepository dao = null;
+    private UserBuilder builder = null;
 
     public UserService() {
     }
@@ -19,8 +22,8 @@ public class UserService {
         this.dao = userRepository;
     }
 
-    public  User save(User user){
-        return dao.save(user);
+    public UserDTO save(User user){
+        return builder.buildUserDTO(dao.save(user)) ;
     }
 
     public List<User> findAll(){

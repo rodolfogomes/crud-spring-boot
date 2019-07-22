@@ -1,6 +1,7 @@
 package br.com.estudo.curdhibernate.controller;
 
 import br.com.estudo.curdhibernate.DTO.UserDTO;
+import br.com.estudo.curdhibernate.builder.UserBuilder;
 import br.com.estudo.curdhibernate.model.User;
 import br.com.estudo.curdhibernate.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,8 @@ public class UserController {
     }
     @PostMapping
     public User create(@RequestBody UserDTO userDTO){
-        return service.save(userDTO.convertToUser());
+        UserBuilder builder = new UserBuilder();
+        return service.save(builder.buildUser(userDTO));
     }
 
     @PutMapping(value = "/{id}")
